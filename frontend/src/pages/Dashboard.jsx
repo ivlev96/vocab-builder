@@ -1,0 +1,182 @@
+import { useState, useEffect, useRef } from 'react';
+import { useAuth } from '../context/AuthContext';
+import { Link, useNavigate } from 'react-router-dom';
+import { motion } from 'framer-motion';
+
+export default function Dashboard() {
+    const { api, logout, user } = useAuth();
+    const [units, setUnits] = useState([]);
+    const [selectedUnits, setSelectedUnits] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const fileInputRef = useRef(null);
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        fetchUnits();
+    }, []);
+
+    const fetchUnits = async () => {
+        try {
+            const res = await api.get('/units');
+            setUnits(res.data);
+        } catch (err) {
+            console.error(err);
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    const handleUploadClick = () => {
+        fileInputRef.current.click();
+    };
+
+    const handleFileChange = async (e) => {
+        const file = e.target.files[0];
+        if (!file) return;
+
+        const formData = new FormData();
+        formData.append('file', file);
+        // Default name to filename, can be edited later if we add that feature
+        formData.append('name', file.name.replace(/\.[^/.]+$/, ""));
+
+        try {
+            await api.post('/units', formData, {
+                headers: { 'Content-Type': 'multipart/form-data' }
+            });
+            fetchUnits();
+            fetchUnits();
+        } catch (err) {
+            alert('Failed to upload unit');
+        }
+    };
+
+    const toggleSelect = (id) => {
+        setSelectedUnits(prev =>
+            prev.includes(id) ? prev.filter(uid => uid !== id) : [...prev, id]
+        );
+    };
+
+    const handleDeleteSelected = async () => {
+        if (!confirm(`Delete ${selectedUnits.length} units? This cannot be undone.`)) return;
+
+        try {
+            await Promise.all(selectedUnits.map(id => api.delete(`/units/${id}`)));
+            setSelectedUnits([]);
+            fetchUnits();
+        } catch (err) {
+            console.error(err);
+            alert(`Failed to delete: ${err.response?.status} - ${err.response?.data?.error || err.message}`);
+        }
+    };
+
+    const handlePracticeSelected = () => {
+        if (selectedUnits.length === 0) return;
+        navigate(`/session/${selectedUnits.join(',')}`);
+    };
+
+    return (
+        <div className="container">
+            <header style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '3rem', paddingTop: '2rem' }}>
+                <h1 className="page-title" style={{ margin: 0, textAlign: 'left' }}>Your Learning Units</h1>
+                <button onClick={logout} className="btn-secondary">Logout</button>
+            </header>
+
+            <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                className="glass-panel"
+                style={{ padding: '2rem', marginBottom: '2rem', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '20px' }}
+            >
+                <div>
+                    <h2 style={{ fontSize: '1.5rem', marginBottom: '0.5rem' }}>Upload New Unit</h2>
+                    <p style={{ color: 'var(--color-text-muted)' }}>Supported formats: CSV, TXT (English, Russian)</p>
+                </div>
+                <div style={{ display: 'flex', gap: '1rem' }}>
+                    {selectedUnits.length > 0 && (
+                        <>
+                            <button onClick={handleDeleteSelected} className="btn-secondary" style={{ borderColor: '#f43f5e', color: '#f43f5e' }}>
+                                Delete ({selectedUnits.length})
+                            </button>
+                            <button onClick={handlePracticeSelected} className="btn-primary">
+                                Practice Selected
+                            </button>
+                        </>
+                    )}
+                    <input
+                        type="file"
+                        ref={fileInputRef}
+                        style={{ display: 'none' }}
+                        accept=".csv,.txt"
+                        onChange={handleFileChange}
+                    />
+                    <button onClick={handleUploadClick} className="btn-primary">
+                        + Add Unit
+                    </button>
+                </div>
+            </motion.div>
+
+            {loading ? (
+                <p style={{ textAlign: 'center', color: 'var(--color-text-muted)' }}>Loading units...</p>
+            ) : (
+                <div className="units-grid">
+                    {units.length === 0 ? (
+                        <div style={{ gridColumn: '1 / -1', textAlign: 'center', padding: '3rem', background: 'rgba(255,255,255,0.02)', borderRadius: 'var(--radius-lg)' }}>
+                            <p style={{ fontSize: '1.2rem', color: 'var(--color-text-muted)' }}>No units found. Upload one to get started!</p>
+                        </div>
+                    ) : (
+                        units.map((unit, index) => (
+                            <motion.div
+                                key={unit.id}
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ delay: index * 0.1 }}
+                                className="glass-panel"
+                                style={{ padding: '2rem', display: 'flex', flexDirection: 'column', height: '100%', position: 'relative' }}
+                            >
+                                <div style={{ position: 'absolute', top: '15px', right: '15px' }}>
+                                    <input
+                                        type="checkbox"
+                                        checked={selectedUnits.includes(unit.id)}
+                                        onChange={() => toggleSelect(unit.id)}
+                                        style={{ width: '20px', height: '20px', cursor: 'pointer' }}
+                                    />
+                                </div>
+                                <h3 style={{ fontSize: '1.4rem', marginBottom: '1rem', paddingRight: '2rem' }}>{unit.name}</h3>
+                                <div style={{ marginTop: 'auto' }}>
+                                    <Link to={`/session/${unit.id}`} className="btn-primary" style={{ width: '100%', textAlign: 'center' }}>
+                                        Start Session
+                                    </Link>
+                                </div>
+                            </motion.div>
+                        ))
+                    )}
+
+                    {units.length > 1 && (
+                        <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: units.length * 0.1 }}
+                            className="glass-panel"
+                            style={{
+                                padding: '2rem',
+                                display: 'flex',
+                                flexDirection: 'column',
+                                height: '100%',
+                                border: '1px solid var(--color-secondary)',
+                                background: 'rgba(6, 182, 212, 0.1)'
+                            }}
+                        >
+                            <h3 style={{ fontSize: '1.4rem', marginBottom: '1rem', color: 'var(--color-secondary)' }}>Master All</h3>
+                            <p style={{ color: 'var(--color-text-muted)', marginBottom: '1.5rem' }}>Review words from all your units in one session.</p>
+                            <div style={{ marginTop: 'auto' }}>
+                                <Link to="/session/all" className="btn-primary" style={{ width: '100%', textAlign: 'center', background: 'var(--color-secondary)' }}>
+                                    Practice All
+                                </Link>
+                            </div>
+                        </motion.div>
+                    )}
+                </div>
+            )}
+        </div>
+    );
+}

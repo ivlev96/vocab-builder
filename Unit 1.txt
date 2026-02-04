@@ -1,0 +1,51 @@
+Adolescence,Взросление
+Adulthood,Взрослый период
+Bond,Родственные узы
+Brotherhood,Братство
+Character,Характер
+Childhood,Детство
+Conflict,Конфликт
+Connection,Связь
+Fatherhood,Отцовство
+Friendship,Дружба
+Instinct,Инстинкт
+Interaction,Взаимодействие
+Motherhood,Материнство
+Nature,Природа
+Parent,Родитель
+Relation,Отношение
+Relationship with, Отношение c кем-то
+Relative,Родственник
+Resemblance,Сходство
+Rivalry,Соперничество
+Sibling,брат или сестра
+Teenager,подросток
+temperament,Темперамент
+ties,Родственные связи
+Upbringing,воспитание
+Active role,Активная роль
+Extended family,Семья в широком смысле слова
+Family gathering,Семейный сбор
+Immediate family,Семья на данный момент
+Maternal Instinct,Материнский инстинкт
+Sibling rivalry,Братское соперничество
+Stable upbringing,Стабильное воспитание
+Striking resemblance,Потрясающее сходство
+Close,Близкий
+Close-knit,Сплочённый
+Maternal,Материнский
+Parental,Родительский
+Rewarding,Награждающий
+Stable,Стабильный
+Accomodate,Удовлетворять или размещать
+Adopt,Усыновлять
+Break down,Сломать
+Develop,Развивать
+Endure,Терпеть
+Establish,Устанавливать
+Have sth in common,Иметь что-то общее
+Inherit,Наследовать
+Interact,Взаимодействовать
+Nurture,Нянчить
+Play a role,Играть роль
+Relate to, Относиться к
