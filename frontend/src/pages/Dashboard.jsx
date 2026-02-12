@@ -143,12 +143,12 @@ export default function Dashboard() {
                             flexDirection: 'column',
                             alignItems: 'center',
                             justifyContent: 'center',
-                            background: 'linear-gradient(135deg, rgba(244, 63, 94, 0.2) 0%, rgba(244, 63, 94, 0.1) 100%)',
-                            border: '2px solid #f43f5e',
+                            background: 'linear-gradient(135deg, rgba(16, 185, 129, 0.2) 0%, rgba(16, 185, 129, 0.1) 100%)',
+                            border: '2px solid #10b981',
                             textAlign: 'center'
                         }}
                     >
-                        <h3 style={{ fontSize: '1.8rem', marginBottom: '0.5rem', color: '#f43f5e' }}>Session in Progress</h3>
+                        <h3 style={{ fontSize: '1.8rem', marginBottom: '0.5rem', color: '#10b981' }}>Session in Progress</h3>
                         <p style={{ color: 'var(--color-text-muted)', fontSize: '1.1rem', marginBottom: '1.5rem' }}>
                             You have an unfinished session. Continue where you left off?
                         </p>
@@ -161,8 +161,8 @@ export default function Dashboard() {
                                 to={`/session/${activeSession.unit_ids}`}
                                 className="btn-primary"
                                 style={{
-                                    background: '#f43f5e',
-                                    borderColor: '#f43f5e',
+                                    background: '#10b981',
+                                    borderColor: '#10b981',
                                     fontSize: '1.2rem',
                                     padding: '12px 32px'
                                 }}
