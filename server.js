@@ -78,8 +78,11 @@ app.post('/api/units', authenticateToken, upload.single('file'), (req, res) => {
 
             parsed.data.forEach(row => {
                 if (row.length >= 2) {
-                    const en = row[0].trim();
+                    let en = row[0].trim();
                     let ru = row[1].trim();
+                    if (en.length > 0) {
+                        en = en.charAt(0).toUpperCase() + en.slice(1);
+                    }
                     if (ru.length > 0) {
                         ru = ru.charAt(0).toUpperCase() + ru.slice(1);
                     }
