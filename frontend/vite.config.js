@@ -7,7 +7,11 @@ export default defineConfig({
     server: {
         host: true, // Listen on all addresses for mobile access
         proxy: {
-            '/api': 'http://localhost:3000'
+            '/api': {
+                target: 'http://localhost:3000',
+                changeOrigin: true,
+                secure: false,
+            }
         }
     }
 })

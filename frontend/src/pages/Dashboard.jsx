@@ -7,24 +7,53 @@ export default function Dashboard() {
     const { api, logout, user } = useAuth();
     const [units, setUnits] = useState([]);
     const [selectedUnits, setSelectedUnits] = useState([]);
+    const [activeSession, setActiveSession] = useState(null);
     const [loading, setLoading] = useState(true);
     const fileInputRef = useRef(null);
     const navigate = useNavigate();
 
     useEffect(() => {
-        fetchUnits();
+        fetchData();
     }, []);
 
-    const fetchUnits = async () => {
+    const fetchData = async () => {
         try {
-            const res = await api.get('/units');
-            setUnits(res.data);
+            const unitsRes = await api.get('/units');
+            if (Array.isArray(unitsRes.data)) {
+                setUnits(unitsRes.data);
+            } else {
+                console.error("Unexpected response for units:", unitsRes.data);
+                // Optionally alert/warn user if it's not what we expect
+                if (typeof unitsRes.data === 'string' && unitsRes.data.includes('<!doctype html>')) {
+                    console.error("Received HTML instead of JSON. Proxy might be misconfigured.");
+                }
+            }
+
+            try {
+                const sessionRes = await api.get('/session');
+                setActiveSession(sessionRes.data);
+            } catch (err) {
+                console.error("Failed to fetch session:", err);
+            }
         } catch (err) {
             console.error(err);
         } finally {
             setLoading(false);
         }
     };
+
+    const handleDebug = async () => {
+        try {
+            const res = await api.get('/session');
+            alert("Raw Session Data:\n" + JSON.stringify(res.data, null, 2));
+        } catch (err) {
+            alert("Debug Error: " + err.message);
+        }
+    };
+
+    // ... (rest of file) ...
+
+    // ... (rest of file) ...
 
     const handleUploadClick = () => {
         fileInputRef.current.click();
@@ -36,15 +65,13 @@ export default function Dashboard() {
 
         const formData = new FormData();
         formData.append('file', file);
-        // Default name to filename, can be edited later if we add that feature
         formData.append('name', file.name.replace(/\.[^/.]+$/, ""));
 
         try {
             await api.post('/units', formData, {
                 headers: { 'Content-Type': 'multipart/form-data' }
             });
-            fetchUnits();
-            fetchUnits();
+            fetchData();
         } catch (err) {
             alert('Failed to upload unit');
         }
@@ -62,7 +89,7 @@ export default function Dashboard() {
         try {
             await Promise.all(selectedUnits.map(id => api.delete(`/units/${id}`)));
             setSelectedUnits([]);
-            fetchUnits();
+            fetchData();
         } catch (err) {
             console.error(err);
             alert(`Failed to delete: ${err.response?.status} - ${err.response?.data?.error || err.message}`);
@@ -78,7 +105,10 @@ export default function Dashboard() {
         <div className="container">
             <header style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '3rem', paddingTop: '2rem' }}>
                 <h1 className="page-title" style={{ margin: 0, textAlign: 'left' }}>Your Learning Units</h1>
-                <button onClick={logout} className="btn-secondary">Logout</button>
+                <div style={{ display: 'flex', gap: '1rem' }}>
+                    <button onClick={handleDebug} className="btn-secondary" style={{ padding: '0.5rem', fontSize: '0.8rem' }}>Debug</button>
+                    <button onClick={logout} className="btn-secondary">Logout</button>
+                </div>
             </header>
 
             <motion.div
@@ -114,6 +144,50 @@ export default function Dashboard() {
                     </button>
                 </div>
             </motion.div>
+
+            {/* Active Session Banner - More Prominent */}
+            {activeSession && (
+                <div style={{ marginBottom: '2rem' }}>
+                    <motion.div
+                        initial={{ opacity: 0, y: -10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        className="glass-panel"
+                        style={{
+                            padding: '2rem',
+                            display: 'flex',
+                            flexDirection: 'column',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            background: 'linear-gradient(135deg, rgba(244, 63, 94, 0.2) 0%, rgba(244, 63, 94, 0.1) 100%)',
+                            border: '2px solid #f43f5e',
+                            textAlign: 'center'
+                        }}
+                    >
+                        <h3 style={{ fontSize: '1.8rem', marginBottom: '0.5rem', color: '#f43f5e' }}>Session in Progress</h3>
+                        <p style={{ color: 'var(--color-text-muted)', fontSize: '1.1rem', marginBottom: '1.5rem' }}>
+                            You have an unfinished session. Continue where you left off?
+                        </p>
+
+                        <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
+                            <div style={{ background: 'rgba(0,0,0,0.2)', padding: '0.5rem 1rem', borderRadius: '8px' }}>
+                                <span>Progress: {activeSession.progress.done} completed</span>
+                            </div>
+                            <Link
+                                to={`/session/${activeSession.unit_ids}`}
+                                className="btn-primary"
+                                style={{
+                                    background: '#f43f5e',
+                                    borderColor: '#f43f5e',
+                                    fontSize: '1.2rem',
+                                    padding: '12px 32px'
+                                }}
+                            >
+                                Continue Learning ►
+                            </Link>
+                        </div>
+                    </motion.div>
+                </div>
+            )}
 
             {loading ? (
                 <p style={{ textAlign: 'center', color: 'var(--color-text-muted)' }}>Loading units...</p>

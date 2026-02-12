@@ -30,25 +30,52 @@ export default function Session() {
 
     const fetchWords = async () => {
         try {
+            // 1. Try to fetch existing session first
+            let session = null;
+            try {
+                const sessionRes = await api.get('/session');
+                session = sessionRes.data;
+            } catch (err) {
+                console.warn("Failed to fetch session. This might be normal if table doesn't exist yet or no session.", err);
+            }
+
+            // If session exists and matches current unit(s), use it
+            if (session && session.unit_ids === unitId) {
+                setQueue(session.queue);
+                setProgress(session.progress);
+                setCurrentWord(session.queue[0]);
+                setLoading(false);
+                setTimeout(() => inputRef.current?.focus(), 100);
+                return;
+            }
+
+            // 2. If no valid session, start new one
             let words = [];
-            // Check for multiple IDs (comma separated)
-            if (unitId.includes(',')) {
-                const res = await api.get(`/words?units=${unitId}`);
-                words = res.data.words;
-            }
-            // Check for 'all'
-            else if (unitId === 'all') {
-                const res = await api.get('/units');
-                const units = res.data;
-                for (const u of units) {
-                    const wRes = await api.get(`/units/${u.id}`);
-                    words = [...words, ...wRes.data.words];
+            try {
+                // Check for multiple IDs (comma separated)
+                if (unitId.includes(',')) {
+                    const res = await api.get(`/words?units=${unitId}`);
+                    words = res.data.words;
                 }
-            }
-            // Single Unit
-            else {
-                const res = await api.get(`/units/${unitId}`);
-                words = res.data.words;
+                // Check for 'all'
+                else if (unitId === 'all') {
+                    const res = await api.get('/units');
+                    const units = res.data;
+                    for (const u of units) {
+                        const wRes = await api.get(`/units/${u.id}`);
+                        words = [...words, ...wRes.data.words];
+                    }
+                }
+                // Single Unit
+                else {
+                    const res = await api.get(`/units/${unitId}`);
+                    words = res.data.words;
+                }
+            } catch (err) {
+                console.error("Failed to fetch words:", err);
+                alert(`Error fetching words: ${err.response?.data?.error || err.message}`);
+                navigate('/');
+                return;
             }
 
             if (words.length === 0) {
@@ -59,16 +86,33 @@ export default function Session() {
 
             // Shuffle
             const shuffled = [...words].sort(() => Math.random() - 0.5);
+            const initialProgress = { total: shuffled.length, done: 0 };
+
             setQueue(shuffled);
             setCurrentWord(shuffled[0]);
-            setProgress({ total: shuffled.length, done: 0 });
+            setProgress(initialProgress);
             setLoading(false);
+
+            // Create new session in DB
+            try {
+                await api.post('/session', {
+                    unit_ids: unitId,
+                    queue: shuffled,
+                    progress: initialProgress
+                });
+            } catch (err) {
+                console.error("Failed to create session:", err);
+                if (err.response?.status === 500) {
+                    alert("Warning: Progress saving is not working. Did you restart the backend server? (Error 500)");
+                }
+            }
 
             // Focus input
             setTimeout(() => inputRef.current?.focus(), 100);
 
         } catch (err) {
-            console.error(err);
+            console.error("Critical session error:", err);
+            alert(`Failed to start session: ${err.message}`);
             navigate('/');
         }
     };
@@ -87,7 +131,8 @@ export default function Session() {
         } else {
             // Typing error (allow retry)
             setStatus('error');
-            setFeedbackMsg(`Correct: ${currentWord.en}`);
+            const capitalizedEn = currentWord.en.charAt(0).toUpperCase() + currentWord.en.slice(1);
+            setFeedbackMsg(`Correct: ${capitalizedEn}`);
 
             // Allow retry without moving queue yet
             setTimeout(() => {
@@ -100,7 +145,8 @@ export default function Session() {
     const handleKnowWord = () => {
         if (status !== 'idle' && status !== 'error') return;
         // Show answer and switch to review mode
-        setInput(currentWord.en);
+        const capitalizedEn = currentWord.en.charAt(0).toUpperCase() + currentWord.en.slice(1);
+        setInput(capitalizedEn);
         setShowAnswer(true);
     };
 
@@ -109,11 +155,18 @@ export default function Session() {
         setShowAnswer(false);
 
         const newQueue = queue.slice(1);
-        setProgress(prev => ({ ...prev, done: prev.done + 1 }));
+        const newProgress = { ...progress, done: progress.done + 1 };
+        setProgress(newProgress);
 
         if (newQueue.length === 0) {
             handleComplete();
         } else {
+            // Save progress to DB
+            api.put('/session', {
+                queue: newQueue,
+                progress: newProgress
+            }).catch(console.error);
+
             setTimeout(() => {
                 setQueue(newQueue);
                 setCurrentWord(newQueue[0]);
@@ -125,7 +178,8 @@ export default function Session() {
 
     const handleMarkWrong = () => {
         setStatus('review_error'); // Lock UI with special error state
-        setFeedbackMsg(`Correct: ${currentWord.en}`);
+        const capitalizedEn = currentWord.en.charAt(0).toUpperCase() + currentWord.en.slice(1);
+        setFeedbackMsg(`Correct: ${capitalizedEn}`);
         setShowAnswer(false);
         setInput(''); // Clear input immediately so it doesn't look like a success
 
@@ -140,8 +194,13 @@ export default function Session() {
         }, 2000);
     };
 
-    const handleComplete = () => {
+    const handleComplete = async () => {
         setStatus('completed');
+        try {
+            await api.delete('/session');
+        } catch (err) {
+            console.error("Failed to clear session", err);
+        }
         confetti({
             particleCount: 150,
             spread: 70,

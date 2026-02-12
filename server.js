@@ -151,6 +151,81 @@ app.get('/api/units/:id', authenticateToken, (req, res) => {
     });
 });
 
+// Session Routes
+app.get('/api/session', authenticateToken, (req, res) => {
+    // console.log(`GET /api/session for user ${req.user.id}`);
+    db.get(`SELECT * FROM sessions WHERE user_id = ?`, [req.user.id], (err, session) => {
+        if (err) return res.status(500).json({ error: err.message });
+        if (!session) return res.json(null);
+        try {
+            res.json({
+                ...session,
+                queue: JSON.parse(session.queue),
+                progress: JSON.parse(session.progress)
+            });
+        } catch (e) {
+            console.error("Error parsing session data:", e);
+            res.status(500).json({ error: "Corrupt session data" });
+        }
+    });
+});
+
+app.post('/api/session', authenticateToken, (req, res) => {
+    const { unit_ids, queue, progress } = req.body;
+    console.log(`POST /api/session for user ${req.user.id}. Unit IDs: ${unit_ids}`);
+
+    // Validate inputs
+    if (!unit_ids || !queue || !progress) {
+        console.error("Missing fields in POST /api/session");
+        return res.status(400).json({ error: "Missing required fields" });
+    }
+
+    db.serialize(() => {
+        // Delete existing session first (Single Active Session)
+        db.run(`DELETE FROM sessions WHERE user_id = ?`, [req.user.id], (err) => {
+            if (err) console.error("Error deleting old session:", err);
+        });
+
+        db.run(`INSERT INTO sessions (user_id, unit_ids, queue, progress) VALUES (?, ?, ?, ?)`,
+            [req.user.id, unit_ids, JSON.stringify(queue), JSON.stringify(progress)],
+            function (err) {
+                if (err) {
+                    console.error("Error inserting session:", err);
+                    return res.status(500).json({ error: err.message });
+                }
+                console.log(`Session created. ID: ${this.lastID}`);
+                res.status(201).json({ id: this.lastID });
+            }
+        );
+    });
+});
+
+app.put('/api/session', authenticateToken, (req, res) => {
+    const { queue, progress } = req.body;
+
+    // Validate
+    if (!queue || !progress) return res.status(400).json({ error: "Missing required fields" });
+
+    const queueStr = JSON.stringify(queue);
+    const progressStr = JSON.stringify(progress);
+
+    db.run(`UPDATE sessions SET queue = ?, progress = ?, updated_at = CURRENT_TIMESTAMP WHERE user_id = ?`,
+        [queueStr, progressStr, req.user.id],
+        (err) => {
+            if (err) return res.status(500).json({ error: err.message });
+            res.json({ success: true });
+        }
+    );
+});
+
+app.delete('/api/session', authenticateToken, (req, res) => {
+    console.log(`DELETE /api/session for user ${req.user.id}`);
+    db.run(`DELETE FROM sessions WHERE user_id = ?`, [req.user.id], (err) => {
+        if (err) return res.status(500).json({ error: err.message });
+        res.json({ success: true });
+    });
+});
+
 app.listen(PORT, '0.0.0.0', () => {
     console.log(`Server running on http://0.0.0.0:${PORT}`);
 });

@@ -37,6 +37,17 @@ function initDb() {
             ru TEXT NOT NULL,
             FOREIGN KEY (unit_id) REFERENCES units(id)
         )`);
+
+        // Sessions Table
+        db.run(`CREATE TABLE IF NOT EXISTS sessions (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            user_id INTEGER UNIQUE NOT NULL,
+            unit_ids TEXT NOT NULL,
+            queue TEXT NOT NULL,
+            progress TEXT NOT NULL,
+            updated_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+            FOREIGN KEY (user_id) REFERENCES users(id)
+        )`);
     });
 }
 
