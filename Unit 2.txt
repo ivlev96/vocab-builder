@@ -1,0 +1,63 @@
+ability,способность
+adolescent,подросток
+behaviour,поведение
+childhood,детство
+concept,концепция
+consequence,последствие
+gesture,жест
+growth,рост (развитие)
+height,рост (высота)
+imagination,воображение
+infancy,младенчество
+infant,младенец
+infant school,ясли
+knowledge,знания
+maturity,зрелость
+memory,память
+milestone,важный этап
+mind,разум
+peers,сверстники
+period,период
+phase,этап
+rate,скорость
+reminder,напоминание
+social skills,социальные навыки
+skill,навык
+stage,стадия
+toddler,малыш (1–3 года)
+transition,переход
+abstract,абстрактный
+cognitive,когнитивный
+clumsy,неуклюжий
+fond,любящий
+fond of,любить (что-то)
+fully-grown,полностью выросший
+immature,незрелый
+independent,независимый
+irresponsible,безответственный
+mature,зрелый
+patient,терпеливый
+rebellious,бунтарский
+significant,значительный
+tolerant,терпимый
+acquire,приобретать
+develop,развивать(ся)
+gesture,жестикулировать
+grow,расти
+imitate,подражать
+look back,оглядываться на прошлое
+master,овладеть (навыком)
+mature,взрослеть
+remember,помнить
+remind,напоминать
+reminisce,предаваться воспоминаниям
+throw a tantrum,закатить истерику
+visualise,визуализировать
+typically,как правило
+bear in mind,иметь в виду
+broaden the mind,расширять кругозор
+have something in (on your) mind,планировать
+it slipped my mind,вылетело из головы
+keep an open mind,быть открытым новым идеям
+my mind went blank,помутился рассудок
+put your mind at ease,успокоиться
