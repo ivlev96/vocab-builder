@@ -42,18 +42,6 @@ export default function Dashboard() {
         }
     };
 
-    const handleDebug = async () => {
-        try {
-            const res = await api.get('/session');
-            alert("Raw Session Data:\n" + JSON.stringify(res.data, null, 2));
-        } catch (err) {
-            alert("Debug Error: " + err.message);
-        }
-    };
-
-    // ... (rest of file) ...
-
-    // ... (rest of file) ...
 
     const handleUploadClick = () => {
         fileInputRef.current.click();
@@ -105,10 +93,7 @@ export default function Dashboard() {
         <div className="container">
             <header style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '3rem', paddingTop: '2rem' }}>
                 <h1 className="page-title" style={{ margin: 0, textAlign: 'left' }}>Your Learning Units</h1>
-                <div style={{ display: 'flex', gap: '1rem' }}>
-                    <button onClick={handleDebug} className="btn-secondary" style={{ padding: '0.5rem', fontSize: '0.8rem' }}>Debug</button>
-                    <button onClick={logout} className="btn-secondary">Logout</button>
-                </div>
+                <button onClick={logout} className="btn-secondary">Logout</button>
             </header>
 
             <motion.div
