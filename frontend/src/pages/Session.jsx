@@ -28,6 +28,39 @@ export default function Session() {
         fetchWords();
     }, [unitId]);
 
+    // Polling for Sync
+    useEffect(() => {
+        if (loading || status === 'completed') return;
+
+        const interval = setInterval(async () => {
+            try {
+                // Determine if we should check (only if idle to avoid interrupting typing)
+                if (status !== 'idle' && status !== 'error' && status !== 'review_error') return;
+
+                const res = await api.get('/session');
+                const serverSession = res.data;
+
+                if (!serverSession) return; // Session complete or deleted
+
+                // Check if server is ahead
+                if (serverSession.progress.done > progress.done) {
+                    console.log("Syncing from server...");
+                    setQueue(serverSession.queue);
+                    setProgress(serverSession.progress);
+                    setCurrentWord(serverSession.queue[0]);
+                    setInput('');
+                    setStatus('idle');
+                    setFeedbackMsg('');
+                    setShowAnswer(false);
+                }
+            } catch (err) {
+                console.error("Sync error:", err);
+            }
+        }, 2000);
+
+        return () => clearInterval(interval);
+    }, [loading, status, progress.done, api]);
+
     const fetchWords = async () => {
         try {
             // 1. Try to fetch existing session first
