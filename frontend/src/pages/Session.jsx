@@ -12,6 +12,7 @@ export default function Session() {
     // Game State
     const [queue, setQueue] = useState([]);
     const [currentWord, setCurrentWord] = useState(null);
+    const [unitLanguage, setUnitLanguage] = useState('English');
     const [input, setInput] = useState('');
     const [status, setStatus] = useState('idle'); // idle, success, error, review_error, completed
     const [loading, setLoading] = useState(true);
@@ -84,6 +85,7 @@ export default function Session() {
 
             // 2. If no valid session, start new one
             let words = [];
+            let sessionLanguage = 'English';
             try {
                 // Check for multiple IDs (comma separated)
                 if (unitId.includes(',')) {
@@ -103,6 +105,9 @@ export default function Session() {
                 else {
                     const res = await api.get(`/units/${unitId}`);
                     words = res.data.words;
+                    if (res.data.unit?.language) {
+                        sessionLanguage = res.data.unit.language;
+                    }
                 }
             } catch (err) {
                 console.error("Failed to fetch words:", err);
@@ -124,6 +129,7 @@ export default function Session() {
             setQueue(shuffled);
             setCurrentWord(shuffled[0]);
             setProgress(initialProgress);
+            setUnitLanguage(sessionLanguage);
             setLoading(false);
 
             // Create new session in DB
@@ -333,7 +339,7 @@ export default function Session() {
                                 type="text"
                                 value={input}
                                 onChange={(e) => setInput(e.target.value)}
-                                placeholder="Type English translation..."
+                                placeholder={`Type ${unitLanguage} translation...`}
                                 style={{
                                     width: '100%',
                                     boxSizing: 'border-box',

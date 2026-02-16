@@ -7,6 +7,7 @@ export default function Dashboard() {
     const { api, logout, user } = useAuth();
     const [units, setUnits] = useState([]);
     const [selectedUnits, setSelectedUnits] = useState([]);
+    const [selectedLanguage, setSelectedLanguage] = useState('English');
     const [activeSession, setActiveSession] = useState(null);
     const [loading, setLoading] = useState(true);
     const fileInputRef = useRef(null);
@@ -54,6 +55,7 @@ export default function Dashboard() {
         const formData = new FormData();
         formData.append('file', file);
         formData.append('name', file.name.replace(/\.[^/.]+$/, ""));
+        formData.append('language', selectedLanguage);
 
         try {
             await api.post('/units', formData, {
@@ -104,7 +106,30 @@ export default function Dashboard() {
             >
                 <div>
                     <h2 style={{ fontSize: '1.5rem', marginBottom: '0.5rem' }}>Upload New Unit</h2>
-                    <p style={{ color: 'var(--color-text-muted)' }}>Supported formats: CSV, TXT (English, Russian)</p>
+                    <p style={{ color: 'var(--color-text-muted)' }}>Supported formats: CSV, TXT (English, Spanish, Russian)</p>
+                    <div style={{ marginTop: '1rem', display: 'flex', alignItems: 'center', gap: '10px' }}>
+                        <span style={{ fontSize: '0.9rem' }}>Language:</span>
+                        <select
+                            value={selectedLanguage}
+                            onChange={(e) => setSelectedLanguage(e.target.value)}
+                            style={{
+                                background: 'rgba(0, 0, 0, 0.2)',
+                                color: 'white',
+                                border: '1px solid rgba(255,255,255,0.1)',
+                                padding: '8px 16px',
+                                borderRadius: 'var(--radius-sm)',
+                                outline: 'none',
+                                cursor: 'pointer',
+                                fontSize: '0.9rem',
+                                transition: 'border-color 0.2s'
+                            }}
+                            onFocus={(e) => e.target.style.borderColor = 'var(--color-primary)'}
+                            onBlur={(e) => e.target.style.borderColor = 'rgba(255,255,255,0.1)'}
+                        >
+                            <option value="English">English</option>
+                            <option value="Spanish">Spanish</option>
+                        </select>
+                    </div>
                 </div>
                 <div style={{ display: 'flex', gap: '1rem' }}>
                     {selectedUnits.length > 0 && (

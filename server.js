@@ -57,45 +57,48 @@ app.get('/api/units', authenticateToken, (req, res) => {
 });
 
 app.post('/api/units', authenticateToken, upload.single('file'), (req, res) => {
-    const { name } = req.body;
-    const filePath = req.file.path;
+    const { name, language } = req.body;
+    const filePath = req.file?.path;
 
     if (!req.file) return res.status(400).json({ error: "No file uploaded" });
 
     const fileContent = fs.readFileSync(filePath, 'utf8');
 
-    // Attempt parse CSV
+    // Attempt parse CSV / TXT
     const parsed = Papa.parse(fileContent, { header: false, skipEmptyLines: true });
 
     if (parsed.data.length === 0) return res.status(400).json({ error: "Empty or invalid file" });
 
     db.serialize(() => {
-        db.run(`INSERT INTO units (user_id, name) VALUES (?, ?)`, [req.user.id, name || req.file.originalname], function (err) {
-            if (err) return res.status(500).json({ error: "Failed to create unit" });
+        db.run(`INSERT INTO units (user_id, name, language) VALUES (?, ?, ?)`,
+            [req.user.id, name || req.file.originalname, language || 'English'],
+            function (err) {
+                if (err) return res.status(500).json({ error: "Failed to create unit" });
 
-            const unitId = this.lastID;
-            const stmt = db.prepare(`INSERT INTO words (unit_id, en, ru) VALUES (?, ?, ?)`);
+                const unitId = this.lastID;
+                const stmt = db.prepare(`INSERT INTO words (unit_id, en, ru) VALUES (?, ?, ?)`);
 
-            parsed.data.forEach(row => {
-                if (row.length >= 2) {
-                    let en = row[0].trim();
-                    let ru = row[1].trim();
-                    if (en.length > 0) {
-                        en = en.charAt(0).toUpperCase() + en.slice(1);
+                parsed.data.forEach(row => {
+                    // Ignore other columns than 1 and 2
+                    if (row.length >= 2) {
+                        let col1 = row[0].trim(); // This is the target language (English or Spanish)
+                        let col2 = row[1].trim(); // This is Russian
+                        if (col1.length > 0) {
+                            col1 = col1.charAt(0).toUpperCase() + col1.slice(1);
+                        }
+                        if (col2.length > 0) {
+                            col2 = col2.charAt(0).toUpperCase() + col2.slice(1);
+                        }
+                        stmt.run(unitId, col1, col2);
                     }
-                    if (ru.length > 0) {
-                        ru = ru.charAt(0).toUpperCase() + ru.slice(1);
-                    }
-                    stmt.run(unitId, en, ru);
-                }
+                });
+                stmt.finalize();
+
+                // Clean up upload
+                fs.unlinkSync(filePath);
+
+                res.status(201).json({ id: unitId, name: name || req.file.originalname, language: language || 'English' });
             });
-            stmt.finalize();
-
-            // Clean up upload
-            fs.unlinkSync(filePath);
-
-            res.status(201).json({ id: unitId, name: name || req.file.originalname });
-        });
     });
 });
 

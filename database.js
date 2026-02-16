@@ -25,9 +25,19 @@ function initDb() {
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             user_id INTEGER NOT NULL,
             name TEXT NOT NULL,
+            language TEXT DEFAULT 'English',
             created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
             FOREIGN KEY (user_id) REFERENCES users(id)
-        )`);
+        )`, (err) => {
+            if (!err) {
+                // Check if language column exists (for existing tables)
+                db.run(`ALTER TABLE units ADD COLUMN language TEXT DEFAULT 'English'`, (alterErr) => {
+                    if (alterErr && !alterErr.message.includes("duplicate column name")) {
+                        console.error("Error migrating units table:", alterErr.message);
+                    }
+                });
+            }
+        });
 
         // Words Table
         db.run(`CREATE TABLE IF NOT EXISTS words (
