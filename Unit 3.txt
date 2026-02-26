@@ -1,0 +1,70 @@
+allergy,аллергия
+anxiety,тревожность
+appetite,аппетит
+artery,артерия
+asset,ресурс
+benefit,польза
+cravings,сильное желание (тяга)
+depression,депрессия
+diagnosis,диагноз
+diet,диета
+dietician,диетолог
+disease,болезнь
+(eating) disorder,расстройство пищевого поведения
+exercise,физические упражнения
+factor,фактор
+fast food,фастфуд
+fat,жир
+harm,вред
+health,здоровье
+heart attack,сердечный приступ
+infection,инфекция
+ingredients,ингредиенты
+insomnia,бессонница
+intake,потребление еды
+junk food,сухомятка
+muscle,мышца
+nutrient,питательное вещество
+nutrition,питание
+obesity,ожирение
+onset,приступ/начало
+portion,порция
+risk,риск
+serving,порция
+stress,стресс
+stroke,инсульт
+treatment,лечение
+therapy,терапия
+variety,разнообразие
+weight,вес
+acute,острый
+to be allergic to,иметь аллергию на
+alternate,чередовать
+brisk,бодрый/активный
+chronic,хронический
+harmful,вредный
+healthy,здоровый
+infectious,инфекционный
+moderate,умеренный
+obese,страдающий ожирением (грубо)
+overweight,с избыточным весом
+persistent,постоянный
+regular,регулярный
+vital,жизненно важный
+avoid,избегать
+counteract,противодействовать
+curb,сдерживать/ограничивать
+cure,излечивать
+diminish,уменьшать
+disrupt,нарушать
+eliminate,устранять накорню
+maintain,поддерживать
+overdo,переусердствовать
+overeat,переедать
+prevent,предотвращать
+recommend,рекомендовать
+recover,восстанавливаться
+reduce,снижать
+skip,пропускать
+stimulate,стимулировать
+trigger,вызывать
