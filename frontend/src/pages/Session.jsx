@@ -4,6 +4,15 @@ import { useAuth } from '../context/AuthContext';
 import { motion, AnimatePresence } from 'framer-motion';
 import confetti from 'canvas-confetti';
 
+const shuffleArray = (arr) => {
+    const res = [...arr];
+    for (let i = res.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [res[i], res[j]] = [res[j], res[i]];
+    }
+    return res;
+};
+
 export default function Session() {
     const { unitId } = useParams();
     const { api } = useAuth();
@@ -75,8 +84,12 @@ export default function Session() {
 
             // If session exists and matches current unit(s), use it
             if (session && session.unit_ids === unitId) {
+                const progressWithRound = {
+                    ...session.progress,
+                    roundRemaining: session.progress.roundRemaining !== undefined ? session.progress.roundRemaining : session.queue.length
+                };
                 setQueue(session.queue);
-                setProgress(session.progress);
+                setProgress(progressWithRound);
                 setCurrentWord(session.queue[0]);
                 setLoading(false);
                 setTimeout(() => inputRef.current?.focus(), 100);
@@ -123,8 +136,12 @@ export default function Session() {
             }
 
             // Shuffle
-            const shuffled = [...words].sort(() => Math.random() - 0.5);
-            const initialProgress = { total: shuffled.length, done: 0 };
+            const shuffled = shuffleArray(words);
+            const initialProgress = {
+                total: shuffled.length,
+                done: 0,
+                roundRemaining: shuffled.length
+            };
 
             setQueue(shuffled);
             setCurrentWord(shuffled[0]);
@@ -194,7 +211,20 @@ export default function Session() {
         setShowAnswer(false);
 
         const newQueue = queue.slice(1);
-        const newProgress = { ...progress, done: progress.done + 1 };
+        let newRoundRemaining = (progress.roundRemaining !== undefined ? progress.roundRemaining : queue.length) - 1;
+        let finalQueue = newQueue;
+
+        if (newQueue.length > 0 && newRoundRemaining <= 0) {
+            finalQueue = shuffleArray(newQueue);
+            newRoundRemaining = finalQueue.length;
+            console.log("Round finished (on correct answer). Shuffled remaining mistakes:", finalQueue);
+        }
+
+        const newProgress = {
+            ...progress,
+            done: progress.done + 1,
+            roundRemaining: newRoundRemaining
+        };
         setProgress(newProgress);
 
         if (newQueue.length === 0) {
@@ -202,13 +232,13 @@ export default function Session() {
         } else {
             // Save progress to DB
             api.put('/session', {
-                queue: newQueue,
+                queue: finalQueue,
                 progress: newProgress
             }).catch(console.error);
 
             setTimeout(() => {
-                setQueue(newQueue);
-                setCurrentWord(newQueue[0]);
+                setQueue(finalQueue);
+                setCurrentWord(finalQueue[0]);
                 setInput('');
                 setStatus('idle');
             }, 800);
@@ -224,12 +254,33 @@ export default function Session() {
 
         // Move to end of queue
         const newQueue = [...queue.slice(1), currentWord];
-        setQueue(newQueue);
+        let newRoundRemaining = (progress.roundRemaining !== undefined ? progress.roundRemaining : queue.length) - 1;
+        let finalQueue = newQueue;
+
+        if (newQueue.length > 0 && newRoundRemaining <= 0) {
+            finalQueue = shuffleArray(newQueue);
+            newRoundRemaining = finalQueue.length;
+            console.log("Round finished (on wrong answer). Shuffled remaining mistakes:", finalQueue);
+        }
+
+        const newProgress = {
+            ...progress,
+            roundRemaining: newRoundRemaining
+        };
+        setProgress(newProgress);
+
+        // Save progress to DB
+        api.put('/session', {
+            queue: finalQueue,
+            progress: newProgress
+        }).catch(console.error);
+
+        setQueue(finalQueue);
 
         setTimeout(() => {
             setStatus('idle');
             setFeedbackMsg('');
-            setCurrentWord(newQueue[0]);
+            setCurrentWord(finalQueue[0]);
         }, 2000);
     };
 
