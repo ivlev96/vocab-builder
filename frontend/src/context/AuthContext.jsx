@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, useEffect } from 'react';
+import { createContext, useContext, useState, useEffect, useMemo } from 'react';
 import axios from 'axios';
 
 const AuthContext = createContext();
@@ -55,12 +55,33 @@ export const AuthProvider = ({ children }) => {
         localStorage.removeItem('token');
     };
 
-    const api = axios.create({
-        baseURL: '/api',
-        headers: {
-            'Authorization': `Bearer ${token}`
-        }
-    });
+    const api = useMemo(() => {
+        const instance = axios.create({
+            baseURL: '/api'
+        });
+
+        instance.interceptors.request.use((config) => {
+            const storedToken = localStorage.getItem('token');
+            if (storedToken) {
+                config.headers['Authorization'] = `Bearer ${storedToken}`;
+            }
+            return config;
+        }, (error) => {
+            return Promise.reject(error);
+        });
+
+        instance.interceptors.response.use(
+            (response) => response,
+            (error) => {
+                if (error.response && (error.response.status === 401 || error.response.status === 403)) {
+                    logout();
+                }
+                return Promise.reject(error);
+            }
+        );
+
+        return instance;
+    }, []);
 
     const value = {
         user,

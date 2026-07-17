@@ -20,6 +20,11 @@ db.serialize(() => {
         });
     });
 
+    db.all("SELECT * FROM units", [], (err, rows) => {
+        if (err) throw err;
+        console.log("Units:", rows);
+    });
+
     db.all("SELECT id, email FROM users", [], (err, rows) => {
         if (err) throw err;
         console.log("Users:", rows);
@@ -27,3 +32,4 @@ db.serialize(() => {
 });
 
 db.close();
+
