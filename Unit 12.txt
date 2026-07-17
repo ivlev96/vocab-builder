@@ -1,0 +1,50 @@
+automatic pilot,автопилот
+computerisation,компьютеризация
+connection,связь
+data,данные
+device,устройство
+function,функция
+gadget,гаджет
+the Internet,Интернет
+the Web,Интернет
+the Net,Интернет
+keyboard,клавиатура
+keypad,клавишная панель
+laptop (computer),ноутбук
+the latest,последний/новинка
+memory,память
+monitor,монитор
+patent,патент
+program,программа
+prototype,прототип
+remote control,пульт дистанционного управления
+silicon chip,кремниевый чип
+technology,технология
+telecommunications,телекоммуникации
+vision,видение/зрение
+wireless connection,беспроводное соединение
+compact,компактный
+computerised,компьютеризированный
+cutting-edge,передовой
+cyber,кибер-
+dated,устаревший
+digital,цифровой
+labour-saving,облегчающий труд
+portable,портативный
+state-of-the-art,самый современный/произведение искусства
+up-to-date,современный / актуальный
+user-friendly,удобный для пользователя
+virtual,виртуальный
+wireless,беспроводной
+access,получать доступ
+connect,подключать / соединять
+download,скачивать
+display,отображать
+envisage,предполагать / представлять
+operate,управлять / работать
+revolutionise,революционизировать
+scroll,прокручивать
+speculate,строить предположения
+store,хранить
+surpass,превосходить
+automatically,автоматически

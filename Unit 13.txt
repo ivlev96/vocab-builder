@@ -1,0 +1,57 @@
+attitude,отношение
+brand,бренд
+culture,культура
+cycle,цикл
+demographics,демография
+development,развитие
+diversity,разнообразие
+globalisation,глобализация
+hindsight,понимание задним числом
+icon,икона / символ
+identity,идентичность/личность
+implication,последствие
+impact,влияние
+increase,увеличение
+influence,влияние
+industry,индустрия
+isolation,изоляция
+joint venture,совместное предприятие
+(have a) monopoly,иметь монополию
+market,рынок
+modernisation,модернизация
+multiculturalism,мультикультурализм
+percentage,процент
+population,население
+prediction,предсказание
+projection,проекция
+proportion,пропорция
+rate,уровень / показатель
+statistics,статистика
+trend,тенденция
+ageing,стареющий
+current,текущий
+demographic,демографический
+elderly,пожилой
+ethnic,этнический
+exotic,экзотический
+global,глобальный
+local,местный
+long-term,долгосрочный
+mid-term,среднесрочный/промежуточный
+multicultural,мультикультурный
+productive,продуктивный
+sceptical,скептический
+short-term,краткосрочный
+subsequent,последующий
+wealthy,богатый
+worldwide,по всему миру
+to compound,усугублять
+to contribute to,способствовать
+to decline,снижаться
+to diminish,уменьшаться
+to dominate,доминировать
+to dwindle,сокращаться
+to factor,учитывать
+to indicate,указывать
+to merge,объединяться
+to migrate,мигрировать

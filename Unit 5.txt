@@ -1,0 +1,65 @@
+assignment,задание
+college,колледж
+controversy,спор
+curriculum,учебная программа
+dissertation,диссертация
+education,образование
+exam,экзамен
+field (of study),область (обучения)
+findings,результаты исследования
+funding,финансирование
+grade,оценка
+graduation,выпуск
+grant,грант
+high school,старшая школа (5-11 классы)
+homework,домашнее задание
+junior school,начальная школа (1-4 классы)
+kindergarten,детский сад
+learning disorder,нарушение обучения
+lecturer,преподаватель (в университете)
+library,библиотека
+limits,пределы
+Masters,магистратура
+nursery,ясли
+PhD,докторантура
+primary school,начальная школа
+program,программа
+project,проект
+research,исследование
+resources,ресурсы
+results,результаты
+scholarship,стипендия
+scope,объём
+secondary school,средняя школа
+sources,источники
+syllabus,учебный план
+task,задание
+theory,теория
+thesis,диссертация
+tutor,наставник
+topic,тема
+university,университет
+academic,академический
+eligible,имеющий право
+mixed,смешанный
+postgraduate,аспирантский
+relevant,уместный
+senior,старший
+single-sex,однополый
+studious,прилежный
+work-related,связанный с работой
+adopt (an approach),применять (подход)
+analyse,анализировать
+conduct,проводить
+concentrate,сосредотачиваться
+consider,рассматривать
+find out,выяснять
+graduate,оканчивать учебное заведение
+learn (about),узнавать (о)
+organise,организовывать
+overcome,преодолевать
+review,пересматривать
+revise,повторять
+struggle with,испытывать трудности
+take (a course),проходить (курс)
+relatively,относительно

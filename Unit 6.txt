@@ -1,0 +1,55 @@
+accuracy,точность
+communication,коммуникация
+concept,понятие
+conjecture,догадка
+dialect,диалект
+fluency,беглость речи
+gesture,жест
+hesitation,колебание
+language,язык
+language barrier,языковой барьер
+linguist,лингвист
+linguistics,лингвистика
+means of communication,средства общения
+mother tongue,родной язык
+native speaker,носитель языка
+pronunciation,произношение
+sign language,язык жестов
+vocabulary,словарный запас
+incoherent,несвязный
+inherent,присущий
+sophisticated,сложный
+spontaneous,спонтанный
+clarify/elucidate/elaborate on,прояснять
+communicate,общаться
+comprehend,понимать
+conclude,заключать
+confirm,подтверждать
+converse,беседовать
+define,определять
+demonstrate,демонстрировать
+distinguish,различать
+emerge,появляться
+evolve,развиваться
+explain,объяснять
+express,выражать
+gesture,жестикулировать
+illustrate,иллюстрировать
+imply,подразумевать
+indicate,указывать
+pronounce,произносить
+recall,вспоминать
+refer (to),ссылаться (на)
+signify,означать
+state,заявлять
+stutter,заикаться
+suggest,предлагать
+translate,переводить
+there is something to be said for,мне есть что сказать тут
+needless to say,нечего и говорить
+have a say,высказать своё мнение
+when all is said and done,в конечном итоге
+having said that,сказав это
+to say the least,мягко говоря
+you can say that again!,ещё бы!
+that is to say,то есть

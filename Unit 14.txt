@@ -1,0 +1,78 @@
+benefit,преимущество / польза
+challenge,испытаний
+compromise,компромисс
+difficulty,трудность
+dilemma,дилемма
+inhabitant,житель
+infrastructure,инфраструктура
+isolation,изоляция
+issue,проблема / вопрос
+megacity,мегаполис
+migrant,мигрант
+obstacle,препятствие
+overpopulation,перенаселение
+population,население
+poverty,бедность
+resolution,решение
+setback,неудача / препятствие
+slum,трущобы
+solution,решение
+tolerance,терпимость
+traffic,дорожное движение / трафик
+urbanisation,урбанизация
+adequate,адекватный / достаточный
+basic,базовый
+booming,быстро развивающийся
+catastrophic,катастрофический
+crowded,переполненный
+packed,переполненный людьми
+decent,достойный
+developing,развивающийся
+double-edged,двусторонний
+isolated,изолированный
+one-sided,односторонний
+long-sighted,дальновидный
+long-term,долгосрочный
+overpriced,слишком дорогой
+overworked,перерабатывающий / перегруженный работой
+pressing,неотложный
+rural,сельский
+short-sighted,недальновидный
+short-term,краткосрочный
+staggering,поразительный
+tolerant,понимающий
+address,решать (проблему) / рассматривать
+adjust,приспосабливать(ся)
+aggravate,усугублять
+cause,вызывать
+compete with,конкурировать
+compound,усугублять
+deal with,справляться с
+deteriorate,ухудшаться (про погоду)
+enhance,улучшать
+exacerbate,обострять / усугублять
+exclude,исключать
+face with,сталкиваться с
+flourish,процветать
+prosper,процветать
+identify,выявлять / определять
+improve,улучшать
+include,включать
+linger,затягиваться
+modify,изменять
+overcome,преодолевать
+present,представлять
+raise,поднимать / повышать
+reform,реформировать
+regulate,регулировать
+remedy,исправлять / устранять
+resolve,решать
+tackle with,бороться с проблемой
+tolerate,терпеть
+transform,преобразовывать
+worsen,ухудшать(ся)
+find a solution,найти решение
+overcome a difficulty,преодолеть трудность
+meet/reach/find a compromise,достичь / найти компромисс
+remedy a situation,исправить ситуацию
+resolve an issue,решить проблему / вопрос

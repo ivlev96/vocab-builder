@@ -1,0 +1,51 @@
+agriculture,сельское хозяйство
+animal kingdom,животный мир
+burrow,нора
+climate,климат
+crop(s),сельскохозяйственные культуры/урожай
+decline,спад
+den,логово
+disaster,катастрофа
+ecological balance,природный баланс
+ecology,экология
+evolution,эволюция
+extinction,вымирание
+fauna,фауна
+flora,флора
+genetics,генетика
+habitat,среда обитания
+human nature,человеческая природа
+insect,насекомое
+Mother Nature,матушка-природа
+pesticides,пестициды
+predator,хищник
+prey,добыча
+repercussions,последствия
+scent,запах
+species,вид
+soil,почва
+vegetation,растительность
+vermin,вредители
+weed,сорняк
+arid,засушливый
+catastrophic,катастрофический
+disastrous,бедственный
+domesticated,одомашненный
+endangered,находящийся под угрозой исчезновения
+extinct,вымерший
+genetically-modified,генетически модифицированный
+introduced,завезённый
+native,местный
+natural,природный
+resistant,устойчивый
+semi-arid,полузасушливый
+tropical,тропический
+vulnerable,уязвимый
+wild,дикий
+adapt,адаптироваться
+combat,бороться
+cultivate,выращивать
+eradicate,искоренять
+evolve,развиваться
+hibernate,впадать в спячку
+tolerate,переносить

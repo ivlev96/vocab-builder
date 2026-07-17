@@ -1,0 +1,74 @@
+balcony,балкон
+brick,кирпич
+building,здание
+ceiling,потолок
+concrete,бетон
+construction,строительство
+cottage,коттедж
+design,дизайн
+device,устройство
+elevator,лифт
+engineering,инженерия
+frame,каркас
+gadget,гаджет
+housing,жильё
+innovation,инновация
+invention,изобретение
+landmark,достопримечательность
+lift shaft,лифтовая шахта
+occupant,житель / обитатель
+platform,платформа
+quarry,карьер
+residence,место жительства
+skyscraper,небоскрёб
+staircase,лестница
+steel,сталь
+storage,хранение
+structure,структура
+tension,напряжение
+timber,древесина
+airy,просторный / воздушный
+conventional,традиционный
+cosy,уютный
+cramped,тесный
+curved,изогнутый
+disposable,одноразовый
+domestic,домашний
+exterior,внешний
+functional,функциональный
+futuristic,футуристический
+high-rise,высотный
+innovative,инновационный
+internal,внутренний
+mass-produced,массового производства
+modern,современный
+multi-storey,многоэтажный
+old-fashioned,старомодный
+ornate,богато украшенный
+prefabricated,сборный
+single-storey,одноэтажный
+spacious,просторный
+state-of-the-art,самый современный
+traditional,традиционный
+two-storey,двухэтажный
+typical,типичный
+ultra-modern,ультрасовременный
+activate,активировать
+automate,автоматизировать
+build,строить
+condemn,осуждать / признавать непригодным
+construct,строить
+decorate,украшать
+demolish,сносить
+design,проектировать
+develop,развивать
+devise,разрабатывать
+haul,тащить / перевозить
+hoist,поднимать
+invent,изобретать
+maintain,поддерживать
+occupy,занимать
+reconstruct,реконструировать
+renovate,ремонтировать / обновлять
+support,поддерживать
+trigger,вызывать

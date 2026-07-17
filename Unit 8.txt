@@ -1,0 +1,40 @@
+age,возраст
+archaeologist,археолог
+century,век
+decade,десятилетие
+era,эра
+evidence,доказательство
+excavation,раскопки
+generation,поколение
+the Middle Ages,Средние века
+millennia,тысячелетия
+period,период
+phase,фаза
+pioneer,пионер
+timeline,хронология
+ancient,древний
+chronological,хронологический
+consecutive,последовательный
+historical,исторический
+imminent,надвигающийся (неизбежный)
+middle-aged,среднего возраста
+nostalgic,ностальгический
+prehistoric,доисторический
+prior (to),предшествующий
+punctual,пунктуальный
+time-consuming,занимающий много времени
+erode,исчезать
+infer,делать вывод
+predate,предшествовать
+span,охватывать
+in time,вовремя (до того как поздно)
+lose track of time,потерять счёт времени
+on time,точно вовремя
+save time,экономить время
+spend time,проводить время
+take so long,занимать так много времени
+the right time,подходящее время
+chronologically,хронологически
+formerly,ранее
+previously,ранее
+subsequently,впоследствии

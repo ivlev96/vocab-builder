@@ -1,0 +1,57 @@
+asteroid,астероид
+astronaut,астронавт
+atmosphere,атмосфера
+cosmos,космос
+crater,кратер
+debris,обломки
+The Earth,Земля
+exploration,исследование
+explorer,исследователь
+galaxy,галактика
+gas,газ
+gravity,гравитация
+horizon,горизонт
+launch,запуск
+meteor,метеор
+The Moon,луна
+ocean,океан
+orbit,орбита
+outer space,космическое пространство
+planet,планета
+radiation,радиация
+rocket,ракета
+satellite,спутник
+simulator,симулятор
+solar system,Солнечная система
+space,космос
+spacecraft,космический корабль
+space shuttle,космический шаттл
+space station,космическая станция
+surface,поверхность
+universe,Вселенная
+weightlessness,невесомость
+commercial,коммерческий
+cosmic,космический
+extreme,экстремальный
+gravitational,гравитационный
+horizontal,горизонтальный
+inevitable,неизбежный
+lunar,лунный
+meteoric,метеорный
+outer,внешний
+solar,солнечный
+terrestrial,земной
+toxic,токсичный
+uninhabitable,непригодный для жизни
+universal,универсальный
+unmanned,беспилотный
+acclimatise,приспосабливаться
+colonise,колонизировать
+explore,исследовать
+float,плавать / парить
+orbit,вращаться по орбите
+propel,приводить в движение
+rotate,вращаться
+sustain,поддерживать
+simulate,моделировать
+undergo,подвергаться

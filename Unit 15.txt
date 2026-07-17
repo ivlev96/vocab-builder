@@ -1,0 +1,70 @@
+acid rain,кислотный дождь
+biodiversity,биоразнообразие
+climate change,изменение климата
+contamination,загрязнение
+deforestation,вырубка лесов
+disposal,уничтожение
+drought,засуха
+ecosystem,экосистема
+emission,выброс
+the environment,окружающая среда
+erosion,эрозия почвы
+exhaust (fumes),выхлопные (газы)
+fertilizer,удобрение
+flood,наводнение
+food chain,пищевая цепочка
+fumes,испарения / выхлопные газы
+greenhouse gases,парниковые газы
+impact,воздействие
+pollutant,загрязняющее вещество
+pollution,загрязнение
+process,переработка
+refuse,мусор / отходы
+strain,нагрузка
+threat,угроза
+waste,отходы
+achievable,достижимый
+advantageous,авантюрный
+at risk,под угрозой
+beneficial,полезный
+chronic,хронический
+conceivable,мыслимый / возможный
+contaminated,загрязнённый
+devastating,разрушительный
+doubtful,сомнительный
+environmental,экологический
+environmentally friendly,экологически безопасный
+feasible,осуществимый
+fruitless,бесплодный / безрезультатный
+futile,бесполезный
+immune,невосприимчивый / имеющий иммунитет
+impracticable,неосуществимый/непрактичный
+improbable,маловероятный
+in danger (of),в опасности (оказаться)
+insoluble,неразрешимый
+irreparable,непоправимый
+irreplaceable,незаменимый
+irreversible,необратимый
+liable,ответственный / подверженный
+life-threatening,угрожающий жизни
+pervasive,широко распространённый
+pointless,бессмысленный
+pristine,нетронутый / первозданный
+questionable,сомнительный
+recyclable,подлежащий переработке
+sustainable,устойчивый
+taxing,изнурительный
+unattainable,недостижимый
+unlikely,маловероятно
+unprecedented,беспрецедентный
+useless,бесполезный
+viable,жизнеспособный
+vital,жизненно важный
+worthwhile,стоящий / полезный
+confront,сталкиваться с / противостоять
+contaminate,загрязнять
+dispose of,избавляться от / утилизировать
+dump,выбрасывать / сваливать
+threaten,угрожать
+inexorably,неумолимо
+inevitably,неизбежно

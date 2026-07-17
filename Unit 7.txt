@@ -1,0 +1,50 @@
+accommodation,размещение
+attraction,достопримечательность
+community,сообщество
+countryside,сельская местность
+destination,пункт назначения
+eco-tourism,экотуризм
+effect,эффект
+facilities,удобства
+identification,идентификация
+inhabitant/resident,житель
+itinerary,маршрут
+journey,путешествие (по суше)
+landscape,пейзаж
+luggage,багаж
+peak,пик
+tourism,туризм
+tourist,турист
+transport,транспорт
+travel,путешествие
+travelling,путешествие
+trend,тенденция
+trip,поездка
+village,деревня
+adventurous,приключенческий
+budget,бюджетный
+breathtaking,захватывающий дух
+coastal,прибрежный
+cosmopolitan,многонациональный
+diverse,разнообразный
+flexible,гибкий
+foreign,иностранный
+local,местный
+luxurious,роскошный
+mountainous,горный
+peaceful,спокойный/мирный
+picturesque,живописный
+polluted,загрязнённый
+quaint,очаровательный
+remote,отдалённый
+rough,суровый
+rural,сельский
+scenic,живописный
+stunning,потрясающий
+tough,трудный
+traditional,традиционный
+unspoilt,нетронутый
+urban,городской
+affect,влиять
+fluctuate,колебаться
+facilitate,облигчать
